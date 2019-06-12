@@ -29,7 +29,7 @@ def handle_slack_event(slack_event: dict, context) -> str:
     # 天気を取得したい時
     if(slack_event["event"]["text"]=="天気"):
         x=otenki_api()
-        mes="{}\n日付:{}\n天気:{}\n最高気温:{}".format(x["title"],x["forecasts"][0]["date"],x["forecasts"][0]["telop"],x["forecasts"][0]["temperature"]["max"]["celsius"])
+        mes="{}\n日付:{}\n天気:{}\n最高気温:{}".format(x["title"],x["forecasts"][1]["date"],x["forecasts"][1]["telop"],x["forecasts"][1]["temperature"]["max"]["celsius"])
         post_message_to_slack_channel(mes, slack_event.get("event").get("channel"))
     else:
         #とりあえずなんか産んだら褒めてくれる
@@ -81,4 +81,3 @@ def otenki_api():
     return html_json
 
 
-        
