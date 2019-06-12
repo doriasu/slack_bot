@@ -3,7 +3,7 @@ import os
 import json
 import logging
 import urllib.request
-
+import random
 
 # ログ設定
 logger = logging.getLogger()
@@ -31,6 +31,16 @@ def handle_slack_event(slack_event: dict, context) -> str:
         x=otenki_api()
         mes="{}\n日付:{}\n天気:{}\n最高気温:{}".format(x["title"],x["forecasts"][0]["date"],x["forecasts"][0]["telop"],x["forecasts"][0]["temperature"]["max"]["celsius"])
         post_message_to_slack_channel(mes, slack_event.get("event").get("channel"))
+    else:
+        #とりあえずなんか産んだら褒めてくれる
+        num=random.uniform(0,100)
+        if num<33:
+            post_message_to_slack_channel("(´-ω-｀)ﾅﾙﾎﾄﾞﾅ", slack_event.get("event").get("channel"))
+        elif num<66:
+            post_message_to_slack_channel("(｀･ω･´)ｲｲﾈｪ～!!", slack_event.get("event").get("channel"))
+        else:
+            post_message_to_slack_channel("(*・ω・*)wkwk", slack_event.get("event").get("channel"))
+
 
     # メッセージの投稿とは別に、Event APIによるリクエストの結果として
     # Slackに何かしらのレスポンスを返す必要があるのでOKと返す
