@@ -84,7 +84,7 @@ def otenki_api():
     html=urllib.request.urlopen(url)
     html_json=json.loads(html.read())
     return html_json
-
+#minimum_performance
 def atcoder(mondai,slack_event):
     url="https://kenkoooo.com/atcoder/resources/problem-performances.json"
     html=urllib.request.urlopen(url)
