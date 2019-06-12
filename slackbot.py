@@ -29,7 +29,8 @@ def handle_slack_event(slack_event: dict, context) -> str:
     # 天気を取得したい時
     if(slack_event["event"]["text"]=="天気"):
         x=otenki_api()
-        post_message_to_slack_channel(x["title"], slack_event.get("event").get("channel"))
+        mes="{}\n日付:{}\n天気:{}\n最高気温:{}".format(x["title"],x["forecasts"][0]["date"],x["forecasts"][0]["telop"],x["forecasts"][0]["temperature"]["max"]["celsius"])
+        post_message_to_slack_channel(mes, slack_event.get("event").get("channel"))
 
     # メッセージの投稿とは別に、Event APIによるリクエストの結果として
     # Slackに何かしらのレスポンスを返す必要があるのでOKと返す
@@ -68,3 +69,6 @@ def otenki_api():
     html=urllib.request.urlopen(url)
     html_json=json.loads(html.read())
     return html_json
+
+
+        
