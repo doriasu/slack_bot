@@ -31,6 +31,11 @@ def handle_slack_event(slack_event: dict, context) -> str:
         x=otenki_api()
         mes="{}\n日付:{}\n天気:{}\n最高気温:{}".format(x["title"],x["forecasts"][1]["date"],x["forecasts"][1]["telop"],x["forecasts"][1]["temperature"]["max"]["celsius"])
         post_message_to_slack_channel(mes, slack_event.get("event").get("channel"))
+    elif(slack_event["event"]["text"][0:6]=="minper"):
+        x=slack_event["event"]["text"][6:]
+        y=atcoder("{}".format(x[:-2]+"_"+x[-1]),slack_event)
+        mes="{}:{}".format(x,y)
+        post_message_to_slack_channel(mes, slack_event.get("event").get("channel"))
     else:
         #とりあえずなんか産んだら褒めてくれる
         num=random.uniform(0,100)
@@ -79,5 +84,17 @@ def otenki_api():
     html=urllib.request.urlopen(url)
     html_json=json.loads(html.read())
     return html_json
+
+def atcoder(mondai,slack_event):
+    url="https://kenkoooo.com/atcoder/resources/problem-performances.json"
+    html=urllib.request.urlopen(url)
+    html_json=json.loads(html.read())
+    post_message_to_slack_channel(mondai, slack_event.get("event").get("channel"))
+    for i in range(0,len(html_json)):
+        if str(html_json[i]["problem_id"])==str(mondai):
+            return html_json[i]["minimum_performance"]
+    return "None"
+    
+
 
 
