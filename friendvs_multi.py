@@ -102,9 +102,11 @@ while (len(friend_list)+1)!=len(vs_list):
             sum=sum+1
         if sum==9:
             break
-for value in vs_list.values():
-    value=int(value.replace(",",""))
-dic2 = sorted(vs_list.items(), key=lambda x:x[1], reverse=True)
+
+vs_list2={}
+for key,value in vs_list.items():
+    vs_list2[str(key)]=int(value.replace(",",""))
+dic2 = sorted(vs_list2.items(), key=lambda x:x[1], reverse=True)
 print(kyoku)
 for i in range(len(dic2)):
     print(dic2[i])
