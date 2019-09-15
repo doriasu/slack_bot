@@ -51,3 +51,4 @@ for i in range(2,9):
 dic2 = sorted(dict.items(), key=lambda x:x[1], reverse=True)
 for i in range(len(dic2)):
     print(dic2[i])
+driver.quit()

@@ -108,6 +108,7 @@ dic2 = sorted(vs_list.items(), key=lambda x:x[1], reverse=True)
 print(kyoku)
 for i in range(len(dic2)):
     print(dic2[i])
+driver.quit()
 
 
 

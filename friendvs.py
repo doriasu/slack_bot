@@ -71,3 +71,4 @@ vsscore={}
 for i in range(len(player_name)):
     vsscore[player_name[i].string]=score[i].string
     print("{}位:{},スコア:{}".format(i+1,player_name[i].string,score[i].string))
+driver.quit()

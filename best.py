@@ -51,7 +51,6 @@ s="Best枠:{}".format(best[0].string)
 print(s)
 s="Recent枠:{}".format(recent[0].string)
 print(s)
-
-
+driver.quit()
 
 
