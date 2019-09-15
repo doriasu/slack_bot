@@ -58,10 +58,10 @@ driver.find_element_by_xpath('//nav[@id="nav"]/div/ul/li[2]/a').click()
 soup = BeautifulSoup(driver.page_source, "html.parser")
 best=soup.select("#rate_info_table tr:nth-child(3) > td:nth-child(2)")
 recent=soup.select("#rate_info_table tr:nth-child(4) > td:nth-child(2)")
-s="Best枠:{}".format(best.string)
-message.reply(s)
-s="Recent枠:{}".format(recent)
-message.reply(s)
+s="Best枠:{}".format(best[0].string)
+print(s)
+s="Recent枠:{}".format(recent[0].string)
+print(s)
 
 
 
