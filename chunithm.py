@@ -1,28 +1,16 @@
-import requests
 from bs4 import BeautifulSoup
-from urllib.parse import urljoin
-
 import sys
-import os
-
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from time import sleep
-from selenium.webdriver.chrome.options import Options
-
-## Selectタグ利用
-from selenium.webdriver.support.ui import Select
 import time
-import chromedriver_binary
 
 #id,passの指定
-USER=""
-PASS=""
+USER=input("idを入力してください")
+PASS=input("パスワードを入力してください")
 
 url="https://chunithm-net.com/mobile/"
 
-options=Options()
-options.add_argument('--headless')
+
 driver = webdriver.Chrome()
 driver.get(url)
 
@@ -50,7 +38,7 @@ for i in range(2,9):
         #div[2]/div/div[5]/div[2-8]/form[1-180]
         xpath.click()
         #beautifulsoupつかう和洋
-        soup = BeautifulSoup(driver.page_source, "html5lib")
+        soup = BeautifulSoup(driver.page_source, "html.parser")
         kaisuu = soup.select(".bg_master span:nth-child(3)")
         title=soup.select(".play_musicdata_title")
         if len(kaisuu)==0:

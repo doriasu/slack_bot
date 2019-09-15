@@ -1,20 +1,9 @@
-import requests
 from bs4 import BeautifulSoup
-from urllib.parse import urljoin
-
 import sys
-import os
-
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from time import sleep
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.alert import Alert
-
-## Selectタグ利用
-from selenium.webdriver.support.ui import Select
 import time
-import chromedriver_binary
+from selenium.webdriver.common.alert import Alert
 
 #id,passの指定
 USER=input("ユーザ名を入力してください")

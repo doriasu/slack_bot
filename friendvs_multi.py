@@ -1,28 +1,14 @@
-import requests
 from bs4 import BeautifulSoup
-from urllib.parse import urljoin
-
 import sys
-import os
-
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from time import sleep
-from selenium.webdriver.chrome.options import Options
-
-## Selectタグ利用
-from selenium.webdriver.support.ui import Select
 import time
-import chromedriver_binary
-
 #id,passの指定
 USER=input("idを入力してください")
 PASS=input("passを入力してください")
 kyoku=input("曲名を入力してください")
 url="https://chunithm-net.com/mobile/"
 
-options=Options()
-options.add_argument('--headless')
 driver = webdriver.Chrome()
 driver.get(url)
 #操作
@@ -38,7 +24,7 @@ time.sleep(1)
 #フレンド総合リストの作成
 driver.get("https://chunithm-net.com/mobile/friend")
 friend_list=[]
-soup = BeautifulSoup(driver.page_source, "html5lib")
+soup = BeautifulSoup(driver.page_source, "html.parser")
 ninzu=soup.find_all("span",class_="ml_10")
 ninzu=int(ninzu[0].string)
 for i in range(ninzu):
@@ -49,7 +35,7 @@ vs_list={}
 driver.get("https://chunithm-net.com/mobile/record/musicGenre")
 driver.find_element_by_xpath('//div[@id="inner"]/div[2]/div/div[3]/form/div[2]/div[4]/div').click()
 html=driver.page_source
-soup=BeautifulSoup(html,"html5lib")
+soup=BeautifulSoup(html,"html.parser")
 music_title=soup.find_all("div",class_="music_title")
 title_list={}
 title_list_tmp=[]
@@ -84,7 +70,7 @@ while (len(friend_list)+1)!=len(vs_list):
     xpath.click()
     #再取得忘れない！！
     html=driver.page_source
-    soup=BeautifulSoup(html,"html5lib")
+    soup=BeautifulSoup(html,"html.parser")
     player_name=soup.find_all("div",class_="rank_block_name")
     score=soup.find_all("div",class_="rank_block_num")
     active=0
@@ -93,14 +79,14 @@ while (len(friend_list)+1)!=len(vs_list):
         active=active+1
     #フレンドアクティブの入れ替え
     driver.get("https://chunithm-net.com/mobile/friend")
-    soup = BeautifulSoup(driver.page_source, "html5lib")
+    soup = BeautifulSoup(driver.page_source, "html.parser")
     #アクティブ9人いるの前提で
     for i in range(active-1):
         driver.find_element_by_xpath('//div[@id="inner"]/div[2]/div/div[3]/div[2]/form/div').click()
     sum=0
     #フレンドリストの初期化
     friend_list=[]
-    soup = BeautifulSoup(driver.page_source, "html5lib")
+    soup = BeautifulSoup(driver.page_source, "html.parser")
     ninzu=soup.find_all("span",class_="ml_10")
     ninzu=int(ninzu[0].string)
     for i in range(ninzu):

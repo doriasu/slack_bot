@@ -1,28 +1,16 @@
-import requests
 from bs4 import BeautifulSoup
-from urllib.parse import urljoin
-
 import sys
-import os
-
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from time import sleep
-from selenium.webdriver.chrome.options import Options
-
-## Selectタグ利用
-from selenium.webdriver.support.ui import Select
 import time
-import chromedriver_binary
 
 #id,passの指定
-USER=""
-PASS=""
+USER=input("ユーザー名を入力してください")
+PASS=input("パスワードを入力してください")
 
 url="https://chunithm-net.com/mobile/"
 
-options=Options()
-options.add_argument('--headless')
+
 driver = webdriver.Chrome()
 driver.get(url)
 print("曲名を入力してください")
@@ -45,7 +33,7 @@ time.sleep(1)
 dict={}
 #楽曲リストの取得
 html=driver.page_source
-soup=BeautifulSoup(html,"html5lib")
+soup=BeautifulSoup(html,"html.parser")
 music_title=soup.find_all("div",class_="music_title")
 title_list={}
 title_list_tmp=[]
@@ -76,7 +64,7 @@ xpath=driver.find_element_by_xpath('//div[@id="inner"]/div[2]/div/div[3]/div/for
 xpath.click()
 #再取得忘れない！！
 html=driver.page_source
-soup=BeautifulSoup(html,"html5lib")
+soup=BeautifulSoup(html,"html.parser")
 player_name=soup.find_all("div",class_="rank_block_name")
 score=soup.find_all("div",class_="rank_block_num")
 vsscore={}
