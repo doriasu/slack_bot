@@ -2,10 +2,11 @@ from bs4 import BeautifulSoup
 import sys
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from getpass import getpass
 import time
 #id,passの指定
 USER=input("idを入力してください")
-PASS=input("passを入力してください")
+PASS=getpass("passを入力してください")
 kyoku=input("曲名を入力してください")
 url="https://chunithm-net.com/mobile/"
 

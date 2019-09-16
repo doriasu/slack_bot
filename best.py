@@ -3,11 +3,12 @@ import sys
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
+from getpass import getpass
 from selenium.webdriver.common.alert import Alert
 
 #id,passの指定
 USER=input("ユーザ名を入力してください")
-PASS=input("パスワードを入力してください")
+PASS=getpass("パスワードを入力してください")
 
 url="https://chunithm-net.com/mobile/"
 
@@ -36,7 +37,7 @@ driver.find_element_by_css_selector('.btn:nth-child(3)').click()
 time.sleep(1)
 #twitter認証
 mail=input("twitterのメールアドレスを入力してください")
-pw_twitter=input("パスワードを入力してください")
+pw_twitter=getpass("パスワードを入力してください")
 driver.find_element_by_id('username_or_email').send_keys(mail)
 driver.find_element_by_id('password').send_keys(pw_twitter)
 driver.find_element_by_css_selector("#allow").click()

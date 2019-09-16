@@ -2,11 +2,12 @@ from bs4 import BeautifulSoup
 import sys
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from getpass import getpass
 import time
 
 #id,passの指定
 USER=input("ユーザー名を入力してください")
-PASS=input("パスワードを入力してください")
+PASS=getpass("パスワードを入力してください")
 
 url="https://chunithm-net.com/mobile/"
 
